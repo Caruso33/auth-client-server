@@ -1,0 +1,8 @@
+.content{
+  /* grid-column: 3 / -1; */
+  /* grid-row: 700px; */
+  display: flex;
+  justify-content: space-around;
+
+  margin: 20px 30px;
+}

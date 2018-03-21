@@ -1,0 +1,35 @@
+nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+}
+nav h1{
+   text-transform: uppercase;
+   display: inline-block;
+   vertical-align: center;
+
+   font-weight: 300;
+   font-size: 2.4rem;
+
+   padding: 0 20px;
+}
+nav .nav-wrapper{
+  display: flex;
+  justify-content: space-around;
+
+  margin: auto;
+}
+
+nav .nav-wrapper a{
+  font-size: 2rem;
+  margin: 0 5px;
+
+  text-decoration: none;
+  color: #fff;
+}
+nav #hamburger{
+  /* display: none; */
+  margin: 0 20px;
+}
