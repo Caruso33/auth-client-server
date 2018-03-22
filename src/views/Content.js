@@ -4,13 +4,13 @@ import './Content.css';
 import OtherContent from './content/OtherContent';
 import VideoPlay from './content/VideoPlay';
 
-export default class Content extends Component{
-  render(){
-    return(
-      <div className='content'>
-        <OtherContent/>
+export default class Content extends Component {
+  render() {
+    return (
+      <main>
+        <OtherContent />
         <VideoPlay />
-      </div>
+      </main>
     );
   }
 }
