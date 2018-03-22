@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
 import './TitleBar.css';
 
 export default class TitleBar extends Component{
@@ -27,7 +26,7 @@ export default class TitleBar extends Component{
     );
   }
 }
-
-TitleBar.propTypes = {
-  title: PropTypes.string.isRequired
-}
+//
+// TitleBar.propTypes = {
+//   title: PropTypes.string.isRequired
+// }

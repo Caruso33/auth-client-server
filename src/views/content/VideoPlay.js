@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
 import './VideoPlay.css';
 
 export default class VideoPlay extends Component{
@@ -7,10 +6,10 @@ export default class VideoPlay extends Component{
     return(
       <div className='contentVideo'>
 
-        <iframe
+        <iframe title="videoContent"
           // width="640" height="640"
           src="https://www.youtube.com/embed/sIvx7sC2soI"
-          frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+          frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen>
 
         </iframe>
       </div>
