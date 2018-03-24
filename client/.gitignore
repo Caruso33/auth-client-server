@@ -1,8 +1,11 @@
+# dependencies
+*/node_modules
+
 # testing
-coverage
+*/coverage
 
 # production
-build
+*/build/
 
 # misc
 .DS_Store
@@ -18,18 +21,6 @@ yarn-error.log*
 #git
 .git
 
-# Node build artifacts
-node_modules
-npm-debug.log
-
-# Local development
-*.env
-*.dev
-.DS_Store
-
-# Docker
-Dockerfile
-docker-compose.yml
-
-# keys
 dev.js
+.DS_Store
+node_modules
