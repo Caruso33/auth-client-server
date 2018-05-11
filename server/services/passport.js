@@ -1,44 +1,66 @@
 const passport = require('passport');
-const mongoose = require('mongoose');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('../config/keys');
+const User = require('../models/user');
+const config = require('../config');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const LocalStrategy = require('passport-local');
 
-const User = mongoose.model('users'); //fetches model class
-
-//used for creating cookie token with mongodb entry
-passport.serializeUser((user, done) => {
-  done(null, user.id); //gets the mongoose _id
-});
-
-// used for incoming cookie to lookg if it's a user in the db
-passport.deserializeUser((id, done) => {
-  User.findById(id)
-    .then(user => done(null, user))
-    .catch(err => console.log(err));
-});
-
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: keys.googleClientId,
-      clientSecret: keys.googleClientSecret,
-      callbackURL: '/auth/google/callback',
-      proxy: true
-    },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id })
-        .then(existingUser => {
-          if (existingUser) {
-            console.log(`Existing User found: ${existingUser}`);
-            done(null, existingUser);
-          } else {
-            new User({ googleId: profile.id })
-              .save()
-              .then(user => done(null, user))
-              .catch(err => console.log(err));
-          }
-        })
-        .catch(err => console.log(err));
+// Create local strategy
+const localOptions = { usernameField: 'email' };
+const localLogin = new LocalStrategy(localOptions, function (
+  email,
+  password,
+  done
+) {
+  // Verify this email and password, call done with the user
+  // if it is the correct email and password
+  // otherwise, call done with false
+  User.findOne({ email: email }, function (err, user) {
+    if (err) {
+      return done(err);
     }
-  )
-);
+    if (!user) {
+      return done(null, false);
+    }
+
+    // compare passwords - is `password` equal to user.password?
+    user.comparePassword(password, function (err, isMatch) {
+      if (err) {
+        return done(err);
+      }
+      if (!isMatch) {
+        return done(null, false);
+      }
+
+      return done(null, user);
+    });
+  });
+});
+
+// Setup options for JWT Strategy
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+  secretOrKey: config.TOKEN_SECRET
+};
+
+// Create JWT strategy
+const jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
+  // See if the user ID in the payload exists in our database
+  // If it does, call 'done' with that other
+  // otherwise, call done without a user object
+  User.findById(payload.sub, function (err, user) {
+    if (err) {
+      return done(err, false);
+    }
+
+    if (user) {
+      done(null, user);
+    } else {
+      done(null, false);
+    }
+  });
+});
+
+// Tell passport to use this strategy
+passport.use(jwtLogin);
+passport.use(localLogin);

@@ -4,18 +4,17 @@ import { BrowserHistory, Route } from 'react';
 import TitleBar from './partials/TitleBar';
 import Footer from './partials/Footer';
 
-import Content from './Content';
-import './App.css';
+import Content from './content/';
 
-export default class App extends Component{
-  render(){
-    return(
-      <div className='container'>
-
+export default class App extends Component {
+  render() {
+    return (
+      <div className="container">
         <TitleBar />
-        <Content/>
-        <Footer/>
+        <Content />
+        <Footer />
       </div>
-    )
+    );
   }
 }
+// logo farbe       #3a4055
