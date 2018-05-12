@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserHistory, Route } from 'react';
 
 import TitleBar from './partials/TitleBar';
 import Footer from './partials/Footer';
