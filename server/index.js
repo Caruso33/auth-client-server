@@ -21,5 +21,6 @@ router(app);
 // Server Setup
 const port = process.env.PORT || config.PORT;
 const server = http.createServer(app);
-server.listen(port);
-console.log('Server listening on:', port);
+server.listen(port, () => {
+  console.log('Server listening on:', port);
+});

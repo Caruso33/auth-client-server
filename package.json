@@ -1,7 +1,7 @@
 {
   "name": "kurz-schmerzlos-server",
   "version": "1.0.0",
-  "main": "server/server.js",
+  "main": "server/index.js",
   "engines": {
     "node": "9.8.0",
     "npm": "5.7.1"
@@ -11,12 +11,10 @@
     "server": "nodemon server",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild":
+      "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "cacheDirectories": [
-    "node_modules",
-    "client/node_modules"
-  ],
+  "cacheDirectories": ["node_modules", "client/node_modules"],
   "author": "",
   "license": "ISC",
   "dependencies": {

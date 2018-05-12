@@ -17,7 +17,7 @@ export function signinUser({ email, password }) {
         localStorage.setItem('token', response.data.token);
         // - redirect to the route '/feature'
         // browserHistory.push('/feature');
-        this.context.router.push('/feature');
+        // this.context.router.push('/feature');
       })
       .catch(() => {
         // If request is bad...
@@ -35,9 +35,12 @@ export function signupUser({ email, password }) {
         dispatch({ type: AUTH_USER });
         localStorage.setItem('token', response.data.token);
         // browserHistory.push('/feature');
-        this.context.router.push('/feature');
+        // this.context.router.push('/feature');
       })
-      .catch(response => dispatch(authError(response.data.error)));
+      .catch(response => {
+        console.log(response);
+        return dispatch(authError(response.data.error));
+      });
   };
 }
 
