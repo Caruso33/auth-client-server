@@ -34,7 +34,10 @@ class Signin extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+      <Form
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        style={{ marginTop: 64 }}
+      >
         <div>
           <label>Email:</label>
           <Field name="email" type="email" component={renderInput} />

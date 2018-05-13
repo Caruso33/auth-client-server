@@ -1,15 +1,11 @@
 import axios from 'axios';
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types';
 
-let ROOT_URL = 'http://localhost:3090';
-// if (process.env.NODE_ENV === 'production') {
-//   ROOT_URL = '';
-// } else {
-//   ROOT_URL = 'http://localhost:3090';
-// }
+// const ROOT_URL = 'http://localhost:3090';
+
 export function signinUser({ email, password }) {
-  const urlSignIn =
-    process.env.NODE_ENV === 'production' ? '/signin' : `${ROOT_URL}/signin`;
+  const urlSignIn = '/signin';
+  // process.env.NODE_ENV === 'production' ? '/signin' : `${ROOT_URL}/signin`;
 
   return dispatch => {
     // Submit email/password to the server
@@ -33,8 +29,8 @@ export function signinUser({ email, password }) {
 }
 
 export function signupUser({ email, password }) {
-  const urlSignUp =
-    process.env.NODE_ENV === 'production' ? '/signup' : `${ROOT_URL}/signup`;
+  const urlSignUp = '/signup';
+  // process.env.NODE_ENV === 'production' ? '/signup' : `${ROOT_URL}/signup`;
 
   return dispatch => {
     axios
@@ -64,9 +60,11 @@ export function signoutUser() {
 }
 
 export function fetchMessage() {
+  const urlFetchMsg = '/';
+  // process.env.NODE_ENV === 'production' ? '' : `${ROOT_URL}`;
   return dispatch => {
     axios
-      .get(ROOT_URL, {
+      .get(urlFetchMsg, {
         headers: { authorization: localStorage.getItem('ks-token') }
       })
       .then(response => {

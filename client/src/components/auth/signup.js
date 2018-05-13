@@ -35,7 +35,10 @@ class Signup extends Component {
   render() {
     const { handleSubmit } = this.props;
     return (
-      <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+      <Form
+        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
+        style={{ marginTop: 64 }}
+      >
         <div className="form-group">
           <Field
             name="email"
