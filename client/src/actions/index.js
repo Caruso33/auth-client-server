@@ -3,7 +3,7 @@ import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types';
 
 let ROOT_URL;
 if (process.env.NODE_ENV === 'production') {
-  ROOT_URL = '/';
+  ROOT_URL = '';
 } else {
   ROOT_URL = 'http://localhost:3090';
 }
