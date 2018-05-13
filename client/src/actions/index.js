@@ -1,17 +1,20 @@
 import axios from 'axios';
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types';
 
-let ROOT_URL;
-if (process.env.NODE_ENV === 'production') {
-  ROOT_URL = '';
-} else {
-  ROOT_URL = 'http://localhost:3090';
-}
+let ROOT_URL = 'http://localhost:3090';
+// if (process.env.NODE_ENV === 'production') {
+//   ROOT_URL = '';
+// } else {
+//   ROOT_URL = 'http://localhost:3090';
+// }
 export function signinUser({ email, password }) {
+  const urlSignIn =
+    process.env.NODE_ENV === 'production' ? '/signin' : `${ROOT_URL}/signin`;
+
   return dispatch => {
     // Submit email/password to the server
     axios
-      .post(`${ROOT_URL}/signin`, { email, password })
+      .post(urlSignIn, { email, password })
       .then(response => {
         // If request is good...
         // - Update state to indicate user is authenticated
@@ -30,9 +33,12 @@ export function signinUser({ email, password }) {
 }
 
 export function signupUser({ email, password }) {
+  const urlSignUp =
+    process.env.NODE_ENV === 'production' ? '/signup' : `${ROOT_URL}/signup`;
+
   return dispatch => {
     axios
-      .post(`${ROOT_URL}/signup`, { email, password })
+      .post(urlSignUp, { email, password })
       .then(response => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem('ks-token', response.data.token);

@@ -7,24 +7,18 @@ class TitleBar extends Component {
     if (this.props.authenticated) {
       // show a link to sign out
       return (
-        <li className="nav-item">
-          <Link className="nav-link" to="/signout">
-            Sign Out
-          </Link>
+        <li>
+          <Link to="/signout">Sign Out</Link>
         </li>
       );
     } else {
       // show a link to sign in or sign up
       return [
-        <li className="nav-item" key={1}>
-          <Link className="nav-link" to="/signin">
-            Sign In
-          </Link>
+        <li key={1}>
+          <Link to="/signin">Sign In</Link>
         </li>,
-        <li className="nav-item" key={2}>
-          <Link className="nav-link" to="/signup">
-            Sign Up
-          </Link>
+        <li key={2}>
+          <Link to="/signup">Sign Up</Link>
         </li>
       ];
     }
@@ -33,13 +27,17 @@ class TitleBar extends Component {
   render() {
     return (
       <nav
-        className="navbar navbar-light"
-        style={{ backgroundColor: '#dfdfda', color: '#3a4055' }}
+        style={{
+          backgroundColor: '#dfdfda',
+          color: '#3a4055',
+          display: 'flex',
+          justifyContent: 'space-around',
+          alignItems: 'center'
+        }}
       >
-        <Link to="/" className="navbar-brand">
-          Redux Auth
-        </Link>
-        <ul className="nav navbar-nav">{this.renderLinks()}</ul>
+        <Link to="/">Kurz & Schmerzlos</Link>
+        <Link to="/dashboard">Dashboard</Link>
+        <ul>{this.renderLinks()}</ul>
       </nav>
     );
   }
