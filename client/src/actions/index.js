@@ -14,8 +14,8 @@ export function signinUser({ email, password }) {
         dispatch({ type: AUTH_USER });
         // - Save the JWT token
         localStorage.setItem('token', response.data.token);
-        // - redirect to the route '/feature'
-        this.history.push('/feature');
+        // - redirect to the route '/dashboard'
+        this.history.push('/dashboard');
       })
       .catch(() => {
         // If request is bad...
@@ -32,8 +32,8 @@ export function signupUser({ email, password }) {
       .then(response => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem('token', response.data.token);
-        // browserHistory.push('/feature');
-        this.history.push('/feature');
+        // browserHistory.push('/dashboard');
+        this.history.push('/dashboard');
       })
       .catch(response => {
         console.log(response);
