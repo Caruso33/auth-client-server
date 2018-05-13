@@ -1,50 +1,54 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './TitleBar.css';
 
-export default class TitleBar extends Component {
-  componentDidMount() {
-    var hamburger = document.querySelector('#hamburger');
-    var main = document.querySelector('main');
-    var navUl = document.querySelector('nav ul');
-
-    hamburger.addEventListener('click', function(e) {
-      navUl.classList.toggle('open');
-      e.stopPropagation();
-    });
-    main.addEventListener('click', function() {
-      navUl.classList.remove('open');
-    });
-  }
-  render() {
-    let title = 'Kurz & Schmerzlos';
-    let NavItems = ['Home', 'Kontakt', 'Über', 'Symptome', 'Videos'];
-    let navItems = NavItems.map(item => {
+class TitleBar extends Component {
+  renderLinks() {
+    if (this.props.authenticated) {
+      // show a link to sign out
       return (
-        <li key={item}>
-          <Link
-            className={item === 'Home' ? 'active' : ''}
-            to={`${item.toLowerCase()}`}
-          >
-            {item}
+        <li className="nav-item">
+          <Link className="nav-link" to="/signout">
+            Sign Out
           </Link>
         </li>
       );
-    });
+    } else {
+      // show a link to sign in or sign up
+      return [
+        <li className="nav-item" key={1}>
+          <Link className="nav-link" to="/signin">
+            Sign In
+          </Link>
+        </li>,
+        <li className="nav-item" key={2}>
+          <Link className="nav-link" to="/signup">
+            Sign Up
+          </Link>
+        </li>
+      ];
+    }
+  }
+
+  render() {
     return (
-      <header>
-        <nav>
-          <h1>{title}</h1>
-          <ul>{navItems}</ul>
-          <div id="hamburger">
-            <i className="fas fa-bars fa-2x" />
-          </div>
-        </nav>
-      </header>
+      <nav
+        className="navbar navbar-light"
+        style={{ backgroundColor: '#dfdfda', color: '#3a4055' }}
+      >
+        <Link to="/" className="navbar-brand">
+          Redux Auth
+        </Link>
+        <ul className="nav navbar-nav">{this.renderLinks()}</ul>
+      </nav>
     );
   }
 }
-//
-// TitleBar.propTypes = {
-//   title: PropTypes.string.isRequired
-// }
+
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth.authenticated
+  };
+}
+
+export default connect(mapStateToProps)(TitleBar);

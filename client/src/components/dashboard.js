@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 
-import TitleBar from './partials/TitleBar';
-import Footer from './partials/Footer';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 import Content from './content/';
 
-export default class App extends Component {
+class App extends Component {
   render() {
-    return (
-      <div className="container">
-        <TitleBar />
-        <Content />
-        <Footer />
-      </div>
-    );
+    return <Content />;
   }
 }
-// logo farbe       #3a4055
+
+function mapStateToProps(state) {
+  return { message: state.auth.message };
+}
+
+export default connect(mapStateToProps, actions)(App);

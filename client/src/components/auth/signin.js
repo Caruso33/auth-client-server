@@ -7,15 +7,13 @@ const renderInput = field => {
   const { input, type } = field;
   return (
     <div>
-      <input {...input} type={type} className="form-control" />
+      <input {...input} type={type} />
     </div>
   );
 };
 
 class Signin extends Component {
   handleFormSubmit({ email, password }) {
-    console.log(email, password);
-
     this.props.signinUser({ email, password });
   }
 
@@ -23,8 +21,9 @@ class Signin extends Component {
     const { errorMessage } = this.props;
     if (errorMessage) {
       return (
-        <div className="alert alert-danger">
+        <div>
           <strong>Oops!</strong>
+          <br />
           {errorMessage}
         </div>
       );
@@ -36,18 +35,16 @@ class Signin extends Component {
 
     return (
       <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-        <div className="form-group">
+        <div>
           <label>Email:</label>
           <Field name="email" type="email" component={renderInput} />
         </div>
-        <div className="form-group">
+        <div>
           <label>Password:</label>
           <Field name="password" type="password" component={renderInput} />
         </div>
         {this.renderAlert()}
-        <button action="submit" className="btn btn-primary">
-          Sign in
-        </button>
+        <button action="submit">Sign in</button>
       </Form>
     );
   }

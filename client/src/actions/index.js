@@ -1,8 +1,12 @@
 import axios from 'axios';
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types';
 
-const ROOT_URL = 'http://localhost:3090';
-
+let ROOT_URL;
+if (process.env.NODE_ENV === 'production') {
+  ROOT_URL = '/';
+} else {
+  ROOT_URL = 'http://localhost:3090';
+}
 export function signinUser({ email, password }) {
   return dispatch => {
     // Submit email/password to the server
@@ -13,7 +17,7 @@ export function signinUser({ email, password }) {
         // - Update state to indicate user is authenticated
         dispatch({ type: AUTH_USER });
         // - Save the JWT token
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('ks-token', response.data.token);
         // - redirect to the route '/dashboard'
         this.history.push('/dashboard');
       })
@@ -31,12 +35,10 @@ export function signupUser({ email, password }) {
       .post(`${ROOT_URL}/signup`, { email, password })
       .then(response => {
         dispatch({ type: AUTH_USER });
-        localStorage.setItem('token', response.data.token);
-        // browserHistory.push('/dashboard');
+        localStorage.setItem('ks-token', response.data.token);
         this.history.push('/dashboard');
       })
       .catch(response => {
-        console.log(response);
         return dispatch(authError(response.data.error));
       });
   };
@@ -50,16 +52,16 @@ export function authError(error) {
 }
 
 export function signoutUser() {
-  localStorage.removeItem('token');
+  localStorage.removeItem('ks-token');
 
   return { type: UNAUTH_USER };
 }
 
 export function fetchMessage() {
-  return function(dispatch) {
+  return dispatch => {
     axios
       .get(ROOT_URL, {
-        headers: { authorization: localStorage.getItem('token') }
+        headers: { authorization: localStorage.getItem('ks-token') }
       })
       .then(response => {
         dispatch({
