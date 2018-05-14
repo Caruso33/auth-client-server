@@ -1,23 +1,20 @@
 {
-  "name": "kurz-schmerzlos",
-  "homepage": "https://kurz-und-schmerzlos.herokuapp.com/",
+  "name": "auth-client-server-client",
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "9.8.0",
-    "npm": "5.7.1"
+    "node": "10.0.0",
+    "npm": "6.0.0"
   },
   "proxy": {
-    "/": {
+    "/api/": {
       "target": "http://localhost:3090"
     }
   },
   "dependencies": {
-    "@material-ui/icons": "^1.0.0-beta.43",
     "axios": "^0.18.0",
     "history": "^4.7.2",
     "lodash": "^4.17.10",
-    "material-ui": "^1.0.0-beta.47",
     "passport": "^0.4.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",

@@ -35,12 +35,10 @@ class Signup extends Component {
   render() {
     const { handleSubmit } = this.props;
     return (
-      <Form
-        onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}
-        style={{ marginTop: 64 }}
-      >
+      <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         <div className="form-group">
           <Field
+            className="form-control"
             name="email"
             type="email"
             component={renderInput}
@@ -49,6 +47,7 @@ class Signup extends Component {
         </div>
         <div className="form-group">
           <Field
+            className="form-control"
             name="password"
             type="password"
             component={renderInput}
@@ -57,6 +56,7 @@ class Signup extends Component {
         </div>
         <div className="form-group">
           <Field
+            className="form-control"
             name="passwordConfirm"
             type="password"
             component={renderInput}

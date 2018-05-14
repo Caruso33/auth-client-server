@@ -24,7 +24,7 @@ const middleware = routerMiddleware(history);
 
 const store = createStore(reducers, applyMiddleware(middleware, reduxThunk));
 
-const token = localStorage.getItem('ks-token');
+const token = localStorage.getItem('token');
 // If we have a token, consider the user to be signed in
 if (token) {
   // we need to update application state

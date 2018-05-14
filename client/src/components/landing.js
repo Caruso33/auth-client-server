@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import { Paper } from 'material-ui';
 
 class Landing extends Component {
   componentWillMount() {
@@ -10,10 +9,10 @@ class Landing extends Component {
 
   render() {
     return (
-      <Paper style={{ marginTop: 74 }}>
+      <Fragment>
         <h2>Landing Page</h2>
         <div>{this.props.message}</div>
-      </Paper>
+      </Fragment>
     );
   }
 }

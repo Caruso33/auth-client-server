@@ -4,7 +4,7 @@ import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE } from './types';
 // const ROOT_URL = 'http://localhost:3090';
 
 export function signinUser({ email, password }) {
-  const urlSignIn = '/signin';
+  const urlSignIn = '/api/auth/signin';
   // process.env.NODE_ENV === 'production' ? '/signin' : `${ROOT_URL}/signin`;
 
   return dispatch => {
@@ -29,7 +29,7 @@ export function signinUser({ email, password }) {
 }
 
 export function signupUser({ email, password }) {
-  const urlSignUp = '/signup';
+  const urlSignUp = '/api/auth/signup';
   // process.env.NODE_ENV === 'production' ? '/signup' : `${ROOT_URL}/signup`;
 
   return dispatch => {
